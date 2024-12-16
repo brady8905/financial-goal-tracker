@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Financial Goal Tracker</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>Financial Goal Tracker</h1>
+  
+  <div class="tracker">
+    <p><strong>Total Goal:</strong> $<span id="display-total-goal">11,010,383</span></p>
+    <p><strong>Balance:</strong> $<span id="display-balance">1,278,910</span></p>
+    <p><strong>Remaining:</strong> $<span id="display-remaining">9,731,473</span></p>
+    <button class="btn" id="add-btn">Add</button>
+    <button class="btn reset-btn" id="reset-btn">Reset Balance</button>
+  </div>
+
+  <div class="settings">
+    <h2>Settings</h2>
+    <p><strong>Set Total Goal:</strong> $<input type="number" id="settings-total-goal" value="11010383"></p>
+    <p><strong>Set Add Amount:</strong> $<input type="number" id="settings-add-amount" value="13500"></p>
+    <p><strong>Set Balance:</strong> $<input type="number" id="settings-balance" value="1278910"></p>
+    <button class="btn" id="apply-settings-btn">Apply Settings</button>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
