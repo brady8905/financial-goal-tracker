@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Financial Goal Tracker</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 20px;
+      background-color: #f4f4f4;
+    }
+    h1 {
+      color: #333;
+    }
+    .tracker, .settings {
+      background: #fff;
+      border-radius: 10px;
+      padding: 20px;
+      max-width: 400px;
+      margin: 20px auto;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    .tracker p, .settings p {
+      font-size: 1.2rem;
+    }
+    .tracker input, .settings input {
+      font-size: 1rem;
+      padding: 5px;
+      margin-top: 5px;
+      margin-bottom: 10px;
+      width: 80%;
+    }
+    .btn {
+      padding: 10px 20px;
+      background: #28a745;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+    .btn:hover {
+      background: #218838;
+    }
+    .reset-btn {
+      background: #dc3545;
+    }
+    .reset-btn:hover {
+      background: #c82333;
+    }
+  </style>
+</head>
+<body>
+  <h1>Financial Goal Tracker</h1>
+  
+  <div class="tracker">
+    <p><strong>Total Goal:</strong> $<span id="display-total-goal">11,010,383</span></p>
+    <p><strong>Balance:</strong> $<span id="display-balance">1,278,910</span></p>
+    <p><strong>Remaining:</strong> $<span id="display-remaining">9,731,473</span></p>
+    <button class="btn" id="add-btn">Add</button>
+    <button class="btn reset-btn" id="reset-btn">Reset Balance</button>
+  </div>
+
+  <div class="settings">
+    <h2>Settings</h2>
+    <p><strong>Set Total Goal:</strong> $<input type="number" id="settings-total-goal" value="11010383"></p>
+    <p><strong>Set Add Amount:</strong> $<input type="number" id="settings-add-amount" value="13500"></p>
+    <p><strong>Set Balance:</strong> $<input type="number" id="settings-balance" value="1278910"></p>
+    <button class="btn" id="apply-settings-btn">Apply Settings</button>
+  </div>
+
+  <script>
+    // Initial Values
+    let totalGoal = 11010383;
+    let balance = 1278910;
+    let addAmount = 13500;
+
+    // Elements
+    const displayTotalGoalEl = document.getElementById('display-total-goal');
+    const displayBalanceEl = document.getElementById('display-balance');
+    const displayRemainingEl = document.getElementById('display-remaining');
+    const addBtn = document.getElementById('add-btn');
+    const resetBtn = document.getElementById('reset-btn');
+
+    // Settings Elements
+    const settingsTotalGoalEl = document.getElementById('settings-total-goal');
+    const settingsAddAmountEl = document.getElementById('settings-add-amount');
+    const settingsBalanceEl = document.getElementById('settings-balance');
+    const applySettingsBtn = document.getElementById('apply-settings-btn');
+
+    // Update the displayed values
+    function updateUI() {
+      const remaining = totalGoal - balance;
+      displayTotalGoalEl.textContent = totalGoal.toLocaleString();
+      displayBalanceEl.textContent = balance.toLocaleString();
+      displayRemainingEl.textContent = remaining.toLocaleString();
+    }
+
+    // Increment the balance
+    function addIncrement() {
+      balance += addAmount;
+      if (balance >= totalGoal) {
+        alert("Congratulations! You've reached your goal!");
+        balance = totalGoal; // Cap the balance at the goal
+      }
+      updateUI();
+    }
+
+    // Reset the balance
+    function resetBalance() {
+      balance = 1278910; // Reset to the initial balance
+      updateUI();
+    }
+
+    // Apply settings
+    function applySettings() {
+      totalGoal = parseFloat(settingsTotalGoalEl.value) || totalGoal;
+      addAmount = parseFloat(settingsAddAmountEl.value) || addAmount;
+      balance = parseFloat(settingsBalanceEl.value) || balance;
+      updateUI();
+    }
+
+    // Event Listeners
+    addBtn.addEventListener('click', addIncrement);
+    resetBtn.addEventListener('click', resetBalance);
+    applySettingsBtn.addEventListener('click', applySettings);
+
+    // Listen for Numpad 1 key (Key Code: 97)
+    document.addEventListener('keydown', (event) => {
+      if (event.code === 'Numpad1') {
+        addIncrement();
+      }
+    });
+
+    // Initialize UI
+    updateUI();
+  </script>
+</body>
+</html>
